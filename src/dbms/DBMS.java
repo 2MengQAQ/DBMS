@@ -172,8 +172,11 @@ public class DBMS {
 		}
 	}
 	/**
-	 * 删除内容 to be continued
+	 * 删除内容
 	 */
-
+	public void delete(int index){
+		System.out.println("即将删除文件f"+index+"中的内容");
+		String content_r = "";//将内容置为空
+		String content_w = "";
 	}
 }
