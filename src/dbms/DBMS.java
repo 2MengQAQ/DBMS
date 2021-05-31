@@ -16,24 +16,24 @@ import java.util.Scanner;
 
 public class DBMS {
 	static DBMS dbms = new DBMS();
-	List<File_n> rlist = new ArrayList<File_n>();//¶ÁÈ¡µÄÎÄ¼şÄÚÈİµÄÁĞ±í,ÓÃÓÚÔÚ¿ØÖÆÌ¨ÏÔÊ¾
-	List<File_n> wlist = new ArrayList<File_n>();//ÓÃÓÚÏòfile.dbÖĞĞ´ÈëµÄÎÄ¼şÁĞ±í
+	List<File_n> rlist = new ArrayList<File_n>();//è¯»å–çš„æ–‡ä»¶å†…å®¹çš„åˆ—è¡¨,ç”¨äºåœ¨æ§åˆ¶å°æ˜¾ç¤º
+	List<File_n> wlist = new ArrayList<File_n>();//ç”¨äºå‘file.dbä¸­å†™å…¥çš„æ–‡ä»¶åˆ—è¡¨
 	static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) throws IOException {
-		dbms.runSystem();//ÔËĞĞÏµÍ³
+		dbms.runSystem();//è¿è¡Œç³»ç»Ÿ
 	}
 	/**
-	 * ÔËĞĞÏµÍ³
+	 * è¿è¡Œç³»ç»Ÿ
 	 * @throws IOException 
 	 */
 	public void runSystem() throws IOException{
-		dbms.loadFileFromRom();//½«10¸öÎÄ¼şµÄÄÚÈİ¶¼×°ÈëÄÚ´æ
-		System.out.println("ÎÄ¼şf1-f10ÒÑ¼ÓÔØµ½ÄÚ´æÖĞ");
+		dbms.loadFileFromRom();//å°†10ä¸ªæ–‡ä»¶çš„å†…å®¹éƒ½è£…å…¥å†…å­˜
+		System.out.println("æ–‡ä»¶f1-f10å·²åŠ è½½åˆ°å†…å­˜ä¸­");
 		dbms.operateFile();
 	}
 	/**
-	 * ´ÓÍâ´æÖĞ½«10¸öÎÄ¼şµÄÄÚÈİ¶¼×°ÔØµ½ÄÚ´æÖĞÈ¥
+	 * ä»å¤–å­˜ä¸­å°†10ä¸ªæ–‡ä»¶çš„å†…å®¹éƒ½è£…è½½åˆ°å†…å­˜ä¸­å»
 	 * @throws IOException
 	 */
 	public void loadFileFromRom() throws IOException{
@@ -42,14 +42,14 @@ public class DBMS {
 			File_n file_n_r = new File_n();
 			File_n file_n_w = new File_n();
 			bReader = new BufferedReader(new FileReader("./file/f"+i+".txt"));
-			String str_all_r = "";//Ò»¸öÎÄ¼şµÄËùÓĞÄÚÈİ(¶Á)
-			String str_all_w = "";//Ò»¸öÎÄ¼şµÄËùÓĞÄÚÈİ(Ğ´)
-			String str_1;//Ã¿Ò»ĞĞµÄÄÚÈİ
+			String str_all_r = "";//ä¸€ä¸ªæ–‡ä»¶çš„æ‰€æœ‰å†…å®¹(è¯»)
+			String str_all_w = "";//ä¸€ä¸ªæ–‡ä»¶çš„æ‰€æœ‰å†…å®¹(å†™)
+			String str_1;//æ¯ä¸€è¡Œçš„å†…å®¹
 			while((str_1 = bReader.readLine())!=null){
 				str_all_r += str_1 + "\n";
 				str_all_w += str_1 + "\r\n";
 			}
-			//È¥µô×îºóÒ»¸ö»»ĞĞ·û
+			//å»æ‰æœ€åä¸€ä¸ªæ¢è¡Œç¬¦
 			file_n_r.setContent(str_all_r.substring(0, str_all_r.length()-1));
 			rlist.add(file_n_r);
 			file_n_w.setContent(str_all_w.substring(0, str_all_w.length()-2));
@@ -58,25 +58,25 @@ public class DBMS {
 		bReader.close();
 	}
 	/**
-	 * ²Ù×÷ÎÄ¼ş
+	 * æ“ä½œæ–‡ä»¶
 	 * @throws IOException 
 	 */
 	public void operateFile() throws IOException{
-		boolean file_flag = true;//Ñ¡ÔñÎÄ¼şÓÃµ½µÄflag
+		boolean file_flag = true;//é€‰æ‹©æ–‡ä»¶ç”¨åˆ°çš„flag
 		while(file_flag){
-			System.out.println("Ñ¡ÔñÎÄ¼şf1ÖÁf10¶ÔÓ¦Êı×Ö1ÖÁ10£¬ÍË³ö¶ÔÓ¦Êı×Ö0£¬ÇëÊäÈë¶ÔÓ¦µÄÊı×Ö:");
+			System.out.println("é€‰æ‹©æ–‡ä»¶f1è‡³f10å¯¹åº”æ•°å­—1è‡³10ï¼Œé€€å‡ºå¯¹åº”æ•°å­—0ï¼Œè¯·è¾“å…¥å¯¹åº”çš„æ•°å­—:");
 			String f_str = sc.next();
-			if(!f_str.equals("0")){//±íÊ¾Ñ¡ÔñµÄÊÇf1-f10
-				System.out.println("Ñ¡ÔñµÄÊÇÎÄ¼şf"+f_str);
+			if(!f_str.equals("0")){//è¡¨ç¤ºé€‰æ‹©çš„æ˜¯f1-f10
+				System.out.println("é€‰æ‹©çš„æ˜¯æ–‡ä»¶f"+f_str);
 				boolean oper_flag = true;
 				while(oper_flag){
-					System.out.println("¶Ô¸ÃÎÄ¼şµÄ²Ù×÷£º0.ÍË³ö  1.²éÑ¯  2.²åÈë  3.É¾³ı£¬ÇëÊäÈë¶ÔÓ¦µÄÊı×Ö£º");
+					System.out.println("å¯¹è¯¥æ–‡ä»¶çš„æ“ä½œï¼š0.é€€å‡º  1.æŸ¥è¯¢  2.æ’å…¥  3.åˆ é™¤ï¼Œè¯·è¾“å…¥å¯¹åº”çš„æ•°å­—ï¼š");
 					String o_str = sc.next();
 					switch (o_str) {
 					case "0":
-						System.out.println("ÍË³ö¶Ôµ±Ç°ÎÄ¼şµÄ²Ù×÷");
-						dbms.writefile(); //ÍË³öÊ±½«f1-10µÄÄÚÈİĞ´µ½file.dbÖĞ
-						oper_flag = false;//Ö»ÓĞ°´0²ÅÄÜÌø³öÑ­»·
+						System.out.println("é€€å‡ºå¯¹å½“å‰æ–‡ä»¶çš„æ“ä½œ");
+						dbms.writefile(); //é€€å‡ºæ—¶å°†f1-10çš„å†…å®¹å†™åˆ°file.dbä¸­
+						oper_flag = false;//åªæœ‰æŒ‰0æ‰èƒ½è·³å‡ºå¾ªç¯
 						break;
 					case "1":
 						dbms.select(Integer.parseInt(f_str));
@@ -88,59 +88,59 @@ public class DBMS {
 						dbms.delete(Integer.parseInt(f_str));
 						break;
 					default:
-						System.out.println("Ö»ÄÜÊäÈëÊı×Ö0-3ÖĞµÄÒ»¸ö");
+						System.out.println("åªèƒ½è¾“å…¥æ•°å­—0-3ä¸­çš„ä¸€ä¸ª");
 						break;
 					}
 				}
-			}else{//±íÊ¾Ñ¡ÔñÍË³ö
-				System.out.println("ÒÑÍË³öÏµÍ³");
+			}else{//è¡¨ç¤ºé€‰æ‹©é€€å‡º
+				System.out.println("å·²é€€å‡ºç³»ç»Ÿ");
 				file_flag = false;
 			}
 		}
 	}
 	/**
-	 * ½«ÄÚ´æÖĞ10¸öÎÄ¼şµÄÄÚÈİÒÔ¼°ÄÚ´æÕ¼ÓÃÇé¿öĞ´µ½file.dbÖĞÈ¥
+	 * å°†å†…å­˜ä¸­10ä¸ªæ–‡ä»¶çš„å†…å®¹ä»¥åŠå†…å­˜å ç”¨æƒ…å†µå†™åˆ°file.dbä¸­å»
 	 * @throws IOException 
 	 */
 	public void writefile() throws IOException{
 		FileWriter fWriter = new FileWriter(new File("./file/file.db"));
-		fWriter.write("");//ÏÈ½«Ô­file.dbÖĞµÄÄÚÈİÖÃ¿Õ
+		fWriter.write("");//å…ˆå°†åŸfile.dbä¸­çš„å†…å®¹ç½®ç©º
  		PrintWriter pWriter;
-		pWriter = new PrintWriter(new FileWriter("./file/file.db",true));//½øĞĞ²»¸²¸ÇµÄ²åÈëÄÚÈİ
+		pWriter = new PrintWriter(new FileWriter("./file/file.db",true));//è¿›è¡Œä¸è¦†ç›–çš„æ’å…¥å†…å®¹
 		for(int i=0;i<10;i++){
 			pWriter.println("BEGIN_F"+(i+1));
 			String content = wlist.get(i).getContent();
 			if(content!=null&&!"".equals(content)){
 				pWriter.println(content);
 			}
-			pWriter.println("ÎÄ¼şf"+(i+1)+"Õ¼ÓÃµÄÄÚ´æ£º"+content.length()+"×Ö½Ú");
+			pWriter.println("æ–‡ä»¶f"+(i+1)+"å ç”¨çš„å†…å­˜ï¼š"+content.length()+"å­—èŠ‚");
 			pWriter.println("END_F"+(i+1)+"\r\n");
 		}
 		fWriter.close();
 		pWriter.close();
 	}
 	/**
-	 * ²éÑ¯ÄÚÈİ
+	 * æŸ¥è¯¢å†…å®¹
 	 */
 	public void select(int index){
-		System.out.println("ÎÄ¼şf"+index+"ÖĞµÄÄÚÈİÎª£º");
-		String content = rlist.get(index-1).getContent();//listµÄÏÂ±ê´Ó0¿ªÊ¼
+		System.out.println("æ–‡ä»¶f"+index+"ä¸­çš„å†…å®¹ä¸ºï¼š");
+		String content = rlist.get(index-1).getContent();//listçš„ä¸‹æ ‡ä»0å¼€å§‹
 		System.out.println(content);
 	}
 	/**
-	 * ²åÈëÄÚÈİ
+	 * æ’å…¥å†…å®¹
 	 */
 	public void insert(int index){
-		System.out.println("ÇëÊäÈëÏòÎÄ¼şf"+index+"ÖĞ²åÈëµÄÄÚÈİ£º");
+		System.out.println("è¯·è¾“å…¥å‘æ–‡ä»¶f"+index+"ä¸­æ’å…¥çš„å†…å®¹ï¼š");
 		String i_sc = sc.next();
 		if(i_sc==null||"".equals(i_sc)){
-			System.out.println("²åÈëµÄÄÚÈİÎª¿Õ");
+			System.out.println("æ’å…¥çš„å†…å®¹ä¸ºç©º");
 		}
-		String content_r = rlist.get(index-1).getContent();//È¡³ö¸ÃÎÄ¼şÖĞÔ­ÓĞµÄÄÚÈİ
-		if(content_r==null||"".equals(content_r)){//Èç¹ûÔ­À´ÊÇ¿ÕµÄ
-			content_r = i_sc;//ÔÚÔ­ÓĞÄÚÈİµÄ»ù´¡ÉÏ¼ÓÉÏÊäÈëµÄ²¿·Ö
+		String content_r = rlist.get(index-1).getContent();//å–å‡ºè¯¥æ–‡ä»¶ä¸­åŸæœ‰çš„å†…å®¹
+		if(content_r==null||"".equals(content_r)){//å¦‚æœåŸæ¥æ˜¯ç©ºçš„
+			content_r = i_sc;//åœ¨åŸæœ‰å†…å®¹çš„åŸºç¡€ä¸ŠåŠ ä¸Šè¾“å…¥çš„éƒ¨åˆ†
 		}else{
-			content_r = content_r + "\n" + i_sc;//ÔÚÔ­ÓĞÄÚÈİµÄ»ù´¡ÉÏ¼ÓÉÏÊäÈëµÄ²¿·Ö
+			content_r = content_r + "\n" + i_sc;//åœ¨åŸæœ‰å†…å®¹çš„åŸºç¡€ä¸ŠåŠ ä¸Šè¾“å…¥çš„éƒ¨åˆ†
 		}
 		String content_w = wlist.get(index-1).getContent();
 		if(content_w==null||"".equals(content_w)){
@@ -148,32 +148,36 @@ public class DBMS {
 		}else{
 			content_w = content_w + "\r\n" + i_sc;
 		}
-		dbms.update(index,content_r,content_w);//¸üĞÂÄÚÈİ
+		dbms.update(index,content_r,content_w);//æ›´æ–°å†…å®¹
 	}
 	/**
-	 * ¸üĞÂÄÚÈİ
+	 * æ›´æ–°å†…å®¹
 	 */
 	public void update(int index,String content_r,String content_w){
-		System.out.println("ÊÇ·ñ½øĞĞ¸üĞÂ£¿ÇëÊäÈë×ÖÄ¸y»òn£¨·Ö±ğ´ú±íÊÇºÍ·ñ£¬²»Çø·Ö´óĞ¡Ğ´£©");
+		System.out.println("æ˜¯å¦è¿›è¡Œæ›´æ–°ï¼Ÿè¯·è¾“å…¥å­—æ¯yæˆ–nï¼ˆåˆ†åˆ«ä»£è¡¨æ˜¯å’Œå¦ï¼Œä¸åŒºåˆ†å¤§å°å†™ï¼‰");
 		boolean u_flag = true;
 		while(u_flag){
 			String u_sc = sc.next();
 			if(u_sc.equals("y")||u_sc.equals("Y")){
 				rlist.get(index-1).setContent(content_r);
 				wlist.get(index-1).setContent(content_w);
-				System.out.println("ÒÑ¸üĞÂ");
+				System.out.println("å·²æ›´æ–°");
 				u_flag = false;
 			}else if(u_sc.equals("n")||u_sc.equals("N")){	
-				System.out.println("¸üĞÂÈ¡Ïû");
+				System.out.println("æ›´æ–°å–æ¶ˆ");
 				u_flag = false;
 			}else{
-				System.out.println("ÇëÊäÈë×ÖÄ¸y»òn");
+				System.out.println("è¯·è¾“å…¥å­—æ¯yæˆ–n");
 			}
 		}
 	}
 	/**
-	 * É¾³ıÄÚÈİ to be continued
+	 * åˆ é™¤å†…å®¹
 	 */
-
+	public void delete(int index){
+		System.out.println("å³å°†åˆ é™¤æ–‡ä»¶f"+index+"ä¸­çš„å†…å®¹");
+		String content_r = "";//å°†å†…å®¹ç½®ä¸ºç©º
+		String content_w = "";
+		dbms.update(index,content_r,content_w);//æ›´æ–°å†…å®¹
 	}
 }
